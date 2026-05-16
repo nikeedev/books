@@ -25,5 +25,8 @@ let html5QrcodeScanner = new Html5QrcodeScanner(
 html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 
 function add() {
-    
+    fetch(window.location.origin+"/add", {
+        method: "POST",
+        body: `\n${isbn.value},${name.value},${shelf.value}`
+    });
 }
