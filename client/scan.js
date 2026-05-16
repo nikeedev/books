@@ -1,6 +1,5 @@
 let reader = document.getElementById("reader");
 
-
 let shelf = document.getElementById("shelf");
 let isbn = document.getElementById("isbn");
 let name = document.getElementById("name");
@@ -27,6 +26,12 @@ html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 function add() {
     fetch(window.location.origin+"/add", {
         method: "POST",
-        body: `\n${isbn.value},${name.value},${shelf.value}`
+        body: `${isbn.value},${name.value},${shelf.value}\n`
     });
+    
+    isbn.value = "";
+    name.value = "";
+    shelf.value = "";
+
+    reader.style.display = "block";
 }
