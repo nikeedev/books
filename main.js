@@ -38,12 +38,13 @@ app.get("/search", (req, res) => {
 
     const result = records
         .map(line => {
-            const [isbn, name, shelf] = line.split(",");
-            return { isbn, name, shelf };
+            const [isbn, name, shelf, author] = line.split(",");
+            return { isbn, name, shelf, author };
         })
         .filter(book =>
             book.isbn.toLowerCase().includes(q) ||
             book.name.toLowerCase().includes(q) ||
+            book.shelf.toLowerCase().includes(q) ||
             book.shelf.toLowerCase().includes(q)
         );
 

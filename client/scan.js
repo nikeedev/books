@@ -3,6 +3,7 @@ let reader = document.getElementById("reader");
 let shelf = document.getElementById("shelf");
 let isbn = document.getElementById("isbn");
 let name = document.getElementById("name");
+let author = document.getElementById("author");
 
 function onScanSuccess(decodedText, decodedResult) {
     // handle the scanned code as you like, for example:
@@ -26,11 +27,12 @@ html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 function add() {
     fetch(window.location.origin+"/add", {
         method: "POST",
-        body: `${isbn.value},${name.value},${shelf.value}\n`
+        body: `${isbn.value},${name.value},${shelf.value},${author.value}\n`
     });
     
     isbn.value = "";
     name.value = "";
+    author.value = "";
     shelf.value = "";
 
     reader.style.display = "block";

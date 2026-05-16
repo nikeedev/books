@@ -42,7 +42,7 @@ function search() {
     .then(data => {
         output.innerHTML = "";
         data.forEach(elem => {
-            output.innerHTML += `${elem["name"]} (${elem["isbn"]}): Shelf ${shelf(elem["shelf"])} <br>`;
+            output.innerHTML += `${elem["name"]}, ${elem["author"]} (${elem["isbn"]}): Shelf ${shelf(elem["shelf"])} <br>`;
         })
     })
     .catch(error => console.error('Error:', error));
