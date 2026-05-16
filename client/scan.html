@@ -5,9 +5,11 @@
     </head>
     <body>
         <p>scan ISBN:</p>
-        <div id="reader" width="600px"></div>
-
-        <label for="shelf">(rad-kolonne) <em>Eks. rad 1 i kolonna 2 = <b>1 - 2</b></em></label><br>
+        <div id="reader" width="400px"></div>
+        
+        <p>ISBN: <input id="isbn"></p>
+        <p>Name: <input id="name"></p>
+        <label for="shelf">rad - kolonne (<em>Eks. rad <b>1</b> i kolonna <b>2</b> => <b>1 - 2</b></em> ):</label> 
         <select id="shelf" name="shelf">
             <option value="one-one">1 - 1</option>
             <option value="one-two">1 - 2</option>
@@ -25,9 +27,13 @@
             <option value="four-two">4 - 2</option>
             <option value="four-three">4 - 3</option>
         </select>
+        <br>
+        <br>
+
+        <button id="add">Add book</button>
 
         <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-
+        
         <script src="scan.js"></script>
     </body>
 </html>

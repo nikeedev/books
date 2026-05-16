@@ -10,5 +10,5 @@ app.get('/books', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`bools at port ${port} (client: http://127.0.0.1:8800/)`);
+    console.log(`books at port ${port} (client: http://127.0.0.1:8800/)`);
 })
