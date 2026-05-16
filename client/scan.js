@@ -27,13 +27,13 @@ html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 function add() {
     fetch(window.location.origin+"/add", {
         method: "POST",
-        body: `${isbn.value},${name.value},${shelf.value},${author.value}\n`
+        body: `${isbn.value},\"${name.value}\",${shelf.value},${author.value}\n`
     });
     
     isbn.value = "";
     name.value = "";
     author.value = "";
-    shelf.value = "";
+    shelf.value = "1-1";
 
     reader.style.display = "block";
 }

@@ -45,7 +45,7 @@ app.get("/search", (req, res) => {
             book.isbn.toLowerCase().includes(q) ||
             book.name.toLowerCase().includes(q) ||
             book.shelf.toLowerCase().includes(q) ||
-            book.shelf.toLowerCase().includes(q)
+            book.author.toLowerCase().includes(q)
         );
 
     res.json(result);

@@ -4,15 +4,21 @@
         <title>books</title>
 
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
             td {
                 width: 150px;
                 height: 50px;
                 border: 1px solid black;
             }
+            
+            html {
+                font-family: "Roboto";
+            }
         </style>
     </head>
     <body>
-        <p>Books v1.2</p>
+        <h1>Books v1.2</h1>
+        <p>Registred books: <span id="reg_books"></span></p>
         <p>Search: <input id="search" type="search"> <button onclick="search()">Search</button></p>
         <span id="search-output"></span>
         <table>

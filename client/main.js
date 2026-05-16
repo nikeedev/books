@@ -1,18 +1,24 @@
 let input = document.getElementById("search");
 let output = document.getElementById("search-output");
 
+let reg_books = 0;
+
 Papa.parse(window.location.origin+"/books", {
     download: true,
     complete: results => {
         for (i = 1; i < results.data.length - 1; i++) {
             let elem = results.data[i];
             if (elem.length !== 0) {
+                reg_books += 1;
+
                 let p = document.createElement("p");
                 p.innerHTML = `${elem[1]} (${elem[0]})`;
                 console.log(elem);
                 document.getElementById(elem[2]).appendChild(p);
             }
         }
+
+        document.getElementById("reg_books").innerHTML = `${reg_books}`;
     }
 })
 
