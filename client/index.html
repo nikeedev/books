@@ -6,7 +6,7 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
             td {
-                width: 150px;
+                width: 450px;
                 height: 50px;
                 border: 1px solid black;
             }
@@ -19,7 +19,7 @@
     <body>
         <h1>Books v1.2</h1>
         <p>Registred books: <span id="reg_books"></span></p>
-        <p>Search: <input id="search" type="search"> <button onclick="search()">Search</button></p>
+        <p>Search: <input id="search" type="search"><button id="search_button">Search</button></p>
         <span id="search-output"></span>
         <table>
             <tr>
@@ -50,8 +50,6 @@
         </table>
         <a href="scan.html">Scan book</a>
         
-        <script src="https://unpkg.com/papaparse@latest/papaparse.min.js"></script>
-
-        <script src="main.js"></script>
+        <script type="module" src="main.js"></script>
     </body>
 </html>

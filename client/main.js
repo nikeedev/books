@@ -1,26 +1,35 @@
+import CSV from "./CSV.js";
+
 let input = document.getElementById("search");
 let output = document.getElementById("search-output");
 
+let search_button = document.getElementById("search_button");
+
 let reg_books = 0;
 
-Papa.parse(window.location.origin+"/books", {
-    download: true,
-    complete: results => {
-        for (i = 1; i < results.data.length - 1; i++) {
-            let elem = results.data[i];
+fetch(window.location.origin+"/books")
+    .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+            return response.text(); // returns a promise
+        })
+    .then(results => {
+        // console.log(results)
+        let data = CSV.parse(results).mappedRows;
+        console.log(data);
+    
+        for (const elem of data) {
             if (elem.length !== 0) {
                 reg_books += 1;
 
                 let p = document.createElement("p");
-                p.innerHTML = `${elem[1]} (${elem[0]})`;
+                p.innerHTML = `${elem.author}: ${elem.name} (${elem.isbn})`;
                 console.log(elem);
-                document.getElementById(elem[2]).appendChild(p);
+                document.getElementById(elem.shelf).appendChild(p);
             }
         }
 
         document.getElementById("reg_books").innerHTML = `${reg_books}`;
-    }
-})
+    });
 
 function shelf(id) {
     switch (id) {
@@ -39,7 +48,7 @@ function shelf(id) {
     }
 }
 
-function search() {
+search_button.onclick = () => {
     fetch(`${window.location.origin}/search?q=${input.value}`)
     .then(response => {
         if (!response.ok) throw new Error('Network response was not ok');

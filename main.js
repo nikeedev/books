@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('node:fs');
+const { parse } = require("csv-parse/sync");
 const app = express();
 const port = 8800;
 
@@ -27,26 +28,18 @@ app.get('/books', (req, res) => {
 app.get("/search", (req, res) => {
     const q = (req.query.q || "").toLowerCase();
 
-    const data = fs.readFileSync("books.csv", "utf8");
+    const file = fs.readFileSync("books.csv", "utf8");
 
-    const rows = data
-        .split("\n")
-        .filter(line => line.trim() !== "");
+    const records = parse(file, {
+        columns: true,
+        skip_empty_lines: true
+      });
 
-    const header = rows[0];
-    const records = rows.slice(1);
-
-    const result = records
-        .map(line => {
-            const [isbn, name, shelf, author] = line.split(",");
-            return { isbn, name, shelf, author };
-        })
-        .filter(book =>
-            book.isbn.toLowerCase().includes(q) ||
-            book.name.toLowerCase().includes(q) ||
-            book.shelf.toLowerCase().includes(q) ||
-            book.author.toLowerCase().includes(q)
-        );
+    const result = records.filter(row =>
+        Object.values(row).some(v =>
+            v.toLowerCase().includes(q)
+        )
+    );
 
     res.json(result);
 });
