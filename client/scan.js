@@ -30,7 +30,7 @@ function add() {
 
     fetch(window.location.origin+"/add", {
         method: "POST",
-        body: `${isbn.value},\"${name.value}\",${shelf.value},${author.value}\n`
+        body: `${isbn.value},\"${name.value}\",${shelf.value},\"${author.value}\"\n`
     });
     
     isbn.value = "";
