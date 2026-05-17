@@ -25,6 +25,9 @@ let html5QrcodeScanner = new Html5QrcodeScanner(
 html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 
 function add() {
+    if (isbn.value.trim() == "" || name.value.trim() == "" || shelf.value.trim() == "" || author.value.trim() == "")
+	return;
+
     fetch(window.location.origin+"/add", {
         method: "POST",
         body: `${isbn.value},\"${name.value}\",${shelf.value},${author.value}\n`
@@ -33,7 +36,6 @@ function add() {
     isbn.value = "";
     name.value = "";
     author.value = "";
-    shelf.value = "1-1";
 
     reader.style.display = "block";
 }
