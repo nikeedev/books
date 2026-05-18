@@ -17,10 +17,7 @@ function onScanFailure(error) {
     console.warn(`Code scan error: ${error}`);
 }
 
-let html5QrcodeScanner = new Html5QrcodeScanner(
-    "reader",
-    { fps: 10, qrbox: {width: 750, height: 450} },
-/* verbose= */ false);
+let html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: {width: 750, height: 450} }, /* verbose= */ false);
 
 html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 
@@ -39,3 +36,14 @@ function add() {
 
     reader.style.display = "block";
 }
+
+document.getElementById("exit").addEventListener('click', (event) => {
+    // Show the native confirmation dialog
+    const userWantsToLeave = window.confirm("Покинуть страницу?");
+
+    // If the user clicks "Cancel", stop the link from opening
+    if (!userWantsToLeave) {
+	event.preventDefault();
+    }
+});
+

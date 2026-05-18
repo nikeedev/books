@@ -13,14 +13,14 @@
 
     </head>
     <body>
-        books v1.2
-        <a href="/">&lt;- Home</a>
-        <p>scan ISBN:</p>
+        Books v1.3.1 (18.05.2026)
+        <a id="exit" href="/">&lt;- Home</a>
+        <p>сканнировать ISBN штрихкод:</p>
         <div id="reader" width="400px"></div>
         
         <p>ISBN: <input id="isbn"></p>
-        <p>Author: <input id="author"></p>
-        <p>Name: <input id="name"></p>
+        <p>Писатель: <input id="author"></p>
+        <p>Имя книги: <input id="name"></p>
         <label for="shelf">kolonne - rad (<em>Eks. kolonne <b>1</b> og rad <b>2</b> => <b>1 - 2</b></em> ):</label> 
         <select id="shelf" name="shelf">
             <option value="one-one">1 - 1</option>
@@ -42,11 +42,11 @@
         <br>
         <br>
 
-        <button onclick="add()">Add book</button>
+        <button onclick="add()">Добавить книгу</button>
 
         <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
         
-        <script src="scan.js"></script>
+        <script src="add.js"></script>
     </body>
 </html>
 
