@@ -57,7 +57,7 @@ search_button.onclick = () => {
     .then(data => {
         output.innerHTML = "";
         data.forEach(elem => {
-            output.innerHTML += `${elem["name"]}, ${elem["author"]} (${elem["isbn"]}): Shelf ${shelf(elem["shelf"])} <br>`;
+            output.innerHTML += `${elem["author"]}: <b>${elem["name"]}</b> (${elem["isbn"]}): <b>Полка ${shelf(elem["shelf"])}</b><br><br>`;
         })
     })
     .catch(error => console.error('Error:', error));
