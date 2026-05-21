@@ -18,11 +18,14 @@
     </head>
     <body>
         <h1>Books v1.4.0 <span style="font-size:12px;">(21.05.2026)</span></h1>
-	    
-        <span id="status">статус: </span>
-
+	    <a id="exit" href="/">&lt;- Обратно</a>
+        <hr>
+        <p>статус: <span id="status"></span></p>
+        <hr>
         <p>Редактировать книгу по ISBN: </p>
-        <input id="edit" placeholder="ISBN">
+        <input id="isbn" placeholder="ISBN">
+        <br>
+        <p>Новий ISBN: <input id="new_isbn"></p>
         <p>Писатель: <input id="author"></p>
         <p>Имя книги: <input id="name"></p>
         <label for="shelf">kolonne - rad (<em>Eks. kolonne <b>1</b> og rad <b>2</b> => <b>1 - 2</b></em> ):</label> 
@@ -43,13 +46,13 @@
             <option value="four-two">4 - 2</option>
             <option value="four-three">4 - 3</option>
         </select>
-        
         <br>
-        <br>
+        <button id="editbook">Редактировать</button>
+        <hr>
 
         <p>Удалить книгу по ISBN: </p>
         <input id="delete" placeholder="ISBN">
-
+        <button id="delbook">Удалить</button>
         <script type="module" src="edit.js"></script>
     </body>
 </html>

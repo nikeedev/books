@@ -27,6 +27,9 @@ function add() {
 
     fetch(window.location.origin+"/add", {
         method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ isbn: isbn.value, name: name.value, shelf: shelf.value, author: author.value })
     });
     

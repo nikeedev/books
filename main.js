@@ -1,12 +1,14 @@
 const express = require('express');
 const db = require('better-sqlite3')('books.db');
+const bodyParser = require('body-parser');
+
 const app = express();
 const port = 8800;
 
 db.pragma('journal_mode = WAL');
 
 app.use('/', express.static('client'));
-app.use(express.json());
+app.use(bodyParser.json());
 
 app.post('/add', (req, res) => {
     const stmt = db.prepare(`INSERT INTO books (isbn, name, shelf, author) VALUES (?, ?, ?, ?)`);
@@ -17,14 +19,18 @@ app.post('/add', (req, res) => {
 })
 
 app.post('/edit', (req, res) => {
+    const stmt = db.prepare(`UPDATE books SET isbn = ?, name = ?, shelf = ?, author = ? WHERE isbn = ?`);
+    
+    const result = stmt.run(req.body.new_isbn, req.body.name, req.body.shelf, req.body.author, req.body.isbn);
 
-
+    console.log(req.body);
     res.sendStatus(200);
 })
 
-app.post('/remove', (req, res) => {
+app.post('/delete', (req, res) => {
+    console.log(req.body)  
     const stmt = db.prepare(`DELETE FROM books WHERE isbn = ?;`);
-
+    
     const result = stmt.run(req.body.isbn);
 
     res.sendStatus(200);

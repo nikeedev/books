@@ -5,6 +5,13 @@ let search_button = document.getElementById("search_button");
 
 let reg_books = 0;
 
+input.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); 
+        search_button.click();
+    }
+});
+
 fetch(window.location.origin+"/books")
     .then(response => {
         if (!response.ok) throw new Error('Network response was not ok');
