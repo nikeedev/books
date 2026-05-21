@@ -21,6 +21,31 @@ app.post('/add', (req, res) => {
     res.sendStatus(200);
 })
 
+app.post('/edit', (req, res) => {
+    fs.readFile(path.join(__dirname, 'books.csv'), "utf8", (err, data) => {
+        if (err) {
+            res.sendStatus(500);
+            console.error(err);
+            return;
+        }
+        
+    });
+
+    res.sendStatus(200);
+})
+
+app.post('/remove', (req, res) => {
+    /*
+    fs.appendFile(path.join(__dirname, 'books.csv'), req.body, (err) => {
+        if (err) {
+            res.sendStatus(500);
+            console.error(err);
+        }
+    });
+    */
+    res.sendStatus(200);
+})
+
 app.get('/books', (req, res) => {
     res.sendFile(path.join(__dirname, 'books.csv'));
 })
