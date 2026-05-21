@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <title>изменить книги</title>
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+            td {
+                width: 450px;
+                height: 50px;
+                border: 1px solid black;
+            }
+            
+            html {
+                font-family: "Roboto";
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Books v1.4.0 <span style="font-size:12px;">(21.05.2026)</span></h1>
+	    
+        <span id="status">статус: </span>
+
+        <p>Редактировать книгу по ISBN: </p>
+        <input id="edit" placeholder="ISBN">
+        <p>Писатель: <input id="author"></p>
+        <p>Имя книги: <input id="name"></p>
+        <label for="shelf">kolonne - rad (<em>Eks. kolonne <b>1</b> og rad <b>2</b> => <b>1 - 2</b></em> ):</label> 
+        <select id="shelf" name="shelf">
+            <option value="one-one">1 - 1</option>
+            <option value="one-two">1 - 2</option>
+            <option value="one-three">1 - 3</option>
+            <hr>
+            <option value="two-one">2 - 1</option>
+            <option value="two-two">2 - 2</option>
+            <option value="two-three">3 - 2</option>
+            <hr>
+            <option value="three-one">3 - 1</option>
+            <option value="three-two">3 - 2</option>
+            <option value="three-three">3 - 3</option>
+            <hr>
+            <option value="four-one">4 - 1</option>
+            <option value="four-two">4 - 2</option>
+            <option value="four-three">4 - 3</option>
+        </select>
+        
+        <br>
+        <br>
+
+        <p>Удалить книгу по ISBN: </p>
+        <input id="delete" placeholder="ISBN">
+
+        <script type="module" src="edit.js"></script>
+    </body>
+</html>

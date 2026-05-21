@@ -1,70 +1,57 @@
 const express = require('express');
-const path = require('path');
-const fs = require('node:fs');
-const { parse } = require("csv-parse/sync");
+const db = require('better-sqlite3')('books.db');
 const app = express();
 const port = 8800;
 
+db.pragma('journal_mode = WAL');
+
 app.use('/', express.static('client'));
-
-
-app.use(express.text());
+app.use(express.json());
 
 app.post('/add', (req, res) => {
-    fs.appendFile(path.join(__dirname, 'books.csv'), req.body, (err) => {
-        if (err) {
-            res.sendStatus(500);
-            console.error(err);
-        }
-    });
+    const stmt = db.prepare(`INSERT INTO books (isbn, name, shelf, author) VALUES (?, ?, ?, ?)`);
+
+    const result = stmt.run(req.body.isbn, req.body.name, req.body.shelf, req.body.author);
 
     res.sendStatus(200);
 })
 
 app.post('/edit', (req, res) => {
-    fs.readFile(path.join(__dirname, 'books.csv'), "utf8", (err, data) => {
-        if (err) {
-            res.sendStatus(500);
-            console.error(err);
-            return;
-        }
-        
-    });
+
 
     res.sendStatus(200);
 })
 
 app.post('/remove', (req, res) => {
-    /*
-    fs.appendFile(path.join(__dirname, 'books.csv'), req.body, (err) => {
-        if (err) {
-            res.sendStatus(500);
-            console.error(err);
-        }
-    });
-    */
+    const stmt = db.prepare(`DELETE FROM books WHERE isbn = ?;`);
+
+    const result = stmt.run(req.body.isbn);
+
     res.sendStatus(200);
 })
 
 app.get('/books', (req, res) => {
-    res.sendFile(path.join(__dirname, 'books.csv'));
+    const books = db.prepare('SELECT * FROM books').all();
+
+    res.send(books).status(200);
 })
 
+
 app.get("/search", (req, res) => {
-    const q = (req.query.q || "").toLowerCase();
+    const q = (req.query.q || "");
 
-    const file = fs.readFileSync("books.csv", "utf8");
+    const stmt = db.prepare(`
+        SELECT * FROM books
+        WHERE name LIKE ?
+            OR author LIKE ?
+            OR shelf like ? 
+            OR isbn LIKE ?
+    `);
 
-    const records = parse(file, {
-        columns: true,
-        skip_empty_lines: true
-      });
-
-    const result = records.filter(row =>
-        Object.values(row).some(v =>
-            v.toLowerCase().includes(q)
-        )
-    );
+    const query = `%${q}%`;
+    let result = stmt.all(query, query, query, query);
+    
+    console.log(result);
 
     res.json(result);
 });

@@ -1,5 +1,3 @@
-import CSV from "./CSV.js";
-
 let input = document.getElementById("search");
 let output = document.getElementById("search-output");
 
@@ -10,22 +8,18 @@ let reg_books = 0;
 fetch(window.location.origin+"/books")
     .then(response => {
         if (!response.ok) throw new Error('Network response was not ok');
-            return response.text(); // returns a promise
+            return response.json(); // returns a promise
         })
     .then(results => {
-        // console.log(results)
-        let data = CSV.parse(results).mappedRows;
-        console.log(data);
+        console.log(results)
     
-        for (const elem of data) {
-            if (elem.length !== 0) {
-                reg_books += 1;
+        for (const elem of results) {
+            reg_books += 1;
 
-                let p = document.createElement("p");
-                p.innerHTML = `${elem.author}: ${elem.name} (${elem.isbn})`;
-                console.log(elem);
-                document.getElementById(elem.shelf).appendChild(p);
-            }
+            let p = document.createElement("p");
+            p.innerHTML = `${elem.author}: ${elem.name} (${elem.isbn})`;
+            console.log(elem);
+            document.getElementById(elem.shelf).appendChild(p);
         }
 
         document.getElementById("reg_books").innerHTML = `${reg_books}`;

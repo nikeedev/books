@@ -23,11 +23,11 @@ html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 
 function add() {
     if (isbn.value.trim() == "" || name.value.trim() == "" || shelf.value.trim() == "" || author.value.trim() == "")
-	return;
+	    return;
 
     fetch(window.location.origin+"/add", {
         method: "POST",
-        body: `${isbn.value},\"${name.value}\",${shelf.value},\"${author.value}\"\n`
+        body: JSON.stringify({ isbn: isbn.value, name: name.value, shelf: shelf.value, author: author.value })
     });
     
     isbn.value = "";
@@ -43,7 +43,7 @@ document.getElementById("exit").addEventListener('click', (event) => {
 
     // If the user clicks "Cancel", stop the link from opening
     if (!userWantsToLeave) {
-	event.preventDefault();
+	    event.preventDefault();
     }
 });
 
